@@ -89,6 +89,21 @@
       .btn-checkin:hover {
         background: linear-gradient(91.34deg, #76caf9, #9c86f3 99.96%);
       }
+      .btn-checked {
+        pointer-events: none;
+        cursor: not-allowed;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px 20px;
+        background: #e5e5e5;
+        color: #8b8b8b;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-weight: 600;
+      }
     }
   }
 }

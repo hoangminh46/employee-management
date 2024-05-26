@@ -5,7 +5,12 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { format, startOfWeek, getDay } from "date-fns";
 import { vi } from "date-fns/locale";
-import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
+import {
+  CheckCircleFilled,
+  CloseCircleFilled,
+  LoginOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { addCheckin, addCheckout, getUsers } from "@/redux/usersSlice";
@@ -46,6 +51,10 @@ export default function UserDashboard() {
   const user = usersData.find((user) => {
     return user.id === userID;
   });
+  const dateToday = new Date().getDate();
+  const currentID = user?.attendance?.find((item) => {
+    return item.day === dateToday;
+  });
 
   const userAttendance = user?.attendance;
   const [events, setEvents] = useState([]);
@@ -75,12 +84,39 @@ export default function UserDashboard() {
               className={
                 item.checkIn && item.checkOut
                   ? "date-content date-full"
-                  : "date-content date-half"
+                  : item.checkIn || item.checkOut
+                  ? "date-content date-half"
+                  : "date-content date-none"
               }
             >
               <div>Công 8 - Muộn 0</div>
-              <div>In: {item.checkIn ? item.checkIn : "N/A"}</div>
-              <div>Out: {item.checkOut ? item.checkOut : "N/A"}</div>
+              <div className="check-status">
+                {item.checkIn ? (
+                  <CheckCircleFilled
+                    style={{
+                      color: "#2F852D",
+                      marginRight: "4px",
+                    }}
+                  />
+                ) : (
+                  <CloseCircleFilled
+                    style={{ color: "#E74C3C", marginRight: "4px" }}
+                  />
+                )}
+                In: {item.checkIn ? item.checkIn : "N/A"}
+              </div>
+              <div className="check-status">
+                {item.checkOut ? (
+                  <CheckCircleFilled
+                    style={{ color: "#2F852D", marginRight: "4px" }}
+                  />
+                ) : (
+                  <CloseCircleFilled
+                    style={{ color: "#E74C3C", marginRight: "4px" }}
+                  />
+                )}
+                Out: {item.checkOut ? item.checkOut : "N/A"}
+              </div>
             </div>
           ),
         };
@@ -119,8 +155,30 @@ export default function UserDashboard() {
               title: (
                 <div className="date-content">
                   <div>Công 8 - Muộn 0</div>
-                  <div>In: {item.checkIn}</div>
-                  <div>Out: {item.checkOut}</div>
+                  <div className="check-status">
+                    {item.checkIn ? (
+                      <CheckCircleFilled
+                        style={{ color: "#2F852D", marginRight: "4px" }}
+                      />
+                    ) : (
+                      <CloseCircleFilled
+                        style={{ color: "#E74C3C", marginRight: "4px" }}
+                      />
+                    )}
+                    In: {item.checkIn ? item.checkIn : "N/A"}
+                  </div>
+                  <div className="check-status">
+                    {item.checkOut ? (
+                      <CheckCircleFilled
+                        style={{ color: "#2F852D", marginRight: "4px" }}
+                      />
+                    ) : (
+                      <CloseCircleFilled
+                        style={{ color: "#E74C3C", marginRight: "4px" }}
+                      />
+                    )}
+                    Out: {item.checkOut ? item.checkOut : "N/A"}
+                  </div>
                 </div>
               ),
             };
@@ -137,14 +195,6 @@ export default function UserDashboard() {
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
     const seconds = currentDate.getSeconds();
-    const day = currentDate.getDate();
-
-    const currentID = user?.attendance?.find((item) => {
-      return item.day === day;
-    });
-
-    console.log(currentID);
-
     const timeCheckout = {
       userId: userID,
       attendanceId: currentID.id,
@@ -163,8 +213,30 @@ export default function UserDashboard() {
               title: (
                 <div className="date-content">
                   <div>Công 8 - Muộn 0</div>
-                  <div>In: {item.checkIn}</div>
-                  <div>Out: {item.checkOut}</div>
+                  <div className="check-status">
+                    {item.checkIn ? (
+                      <CheckCircleFilled
+                        style={{ color: "#2F852D", marginRight: "4px" }}
+                      />
+                    ) : (
+                      <CloseCircleFilled
+                        style={{ color: "#E74C3C", marginRight: "4px" }}
+                      />
+                    )}
+                    In: {item.checkIn ? item.checkIn : "N/A"}
+                  </div>
+                  <div className="check-status">
+                    {item.checkOut ? (
+                      <CheckCircleFilled
+                        style={{ color: "#2F852D", marginRight: "4px" }}
+                      />
+                    ) : (
+                      <CloseCircleFilled
+                        style={{ color: "#E74C3C", marginRight: "4px" }}
+                      />
+                    )}
+                    Out: {item.checkOut ? item.checkOut : "N/A"}
+                  </div>
                 </div>
               ),
             };
@@ -220,14 +292,22 @@ export default function UserDashboard() {
             <p>Chấm công hàng ngày</p>
           </div>
           <p className={cx("time-today")}>Hôm nay: {currentTime}</p>
-          <div className={cx("btn-checkin")} onClick={handleCheckin}>
-            <LoginOutlined />
-            Checkin
-          </div>
-          <div className={cx("btn-checkin")} onClick={handleCheckout}>
-            <LogoutOutlined />
-            Checkout
-          </div>
+          {currentID?.checkIn ? null : (
+            <div className={cx("btn-checkin")} onClick={handleCheckin}>
+              <LoginOutlined />
+              Checkin
+            </div>
+          )}
+          {currentID?.checkIn &&
+          currentID?.checkOut ? null : currentID?.checkIn ? (
+            <div className={cx("btn-checkin")} onClick={handleCheckout}>
+              <LogoutOutlined />
+              Checkout
+            </div>
+          ) : null}
+          {currentID?.checkIn && currentID?.checkOut ? (
+            <div className={cx("btn-checked")}>Đã chấm công</div>
+          ) : null}
         </div>
       </div>
     </div>
