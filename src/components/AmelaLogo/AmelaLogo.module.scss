@@ -1,0 +1,95 @@
+.site-brand {
+  line-height: 0;
+  .logo {
+    display: flex;
+    height: 34px;
+    align-items: center;
+    position: relative;
+    img {
+      border: none;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .ani-bar-logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    pointer-events: none;
+    .bar-ani {
+      height: 22px;
+      width: 5px;
+      background-color: #fea628;
+      border-radius: 5px;
+      margin: 0 2.5px;
+    }
+    .bar-ani.el-tall {
+      height: 34px;
+    }
+    .el-short.el-1 {
+      -webkit-animation: ani-el-logo-1 0.2s infinite alternate;
+      animation: ani-el-logo-1 0.2s infinite alternate;
+      -webkit-transform-origin: 0% 30%;
+      -ms-transform-origin: 0% 30%;
+      transform-origin: 0% 30%;
+    }
+    .el-tall.el-2 {
+      -webkit-animation: ani-el-logo-2 0.2s infinite alternate;
+      animation: ani-el-logo-2 0.2s infinite alternate;
+      animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-transform-origin: 0% 60%;
+      -ms-transform-origin: 0% 60%;
+      transform-origin: 0% 60%;
+      -webkit-animation-delay: 0.15s;
+      animation-delay: 0.15s;
+    }
+    .bar-ani.el-3 {
+      -webkit-animation: ani-el-logo-3 0.2s infinite alternate;
+      animation: ani-el-logo-3 0.2s infinite alternate;
+      animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-transform-origin: 0% 50%;
+      -ms-transform-origin: 0% 50%;
+      transform-origin: 0% 50%;
+      -webkit-animation-delay: 0.07s;
+      animation-delay: 0.07s;
+    }
+  }
+  @keyframes ani-el-logo-1 {
+    0% {
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+    100% {
+      -webkit-transform: scaleY(1.4);
+      transform: scaleY(1.4);
+    }
+  }
+  @keyframes ani-el-logo-2 {
+    0% {
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+    100% {
+      -webkit-transform: scaleY(1.3);
+      transform: scaleY(1.3);
+    }
+  }
+  @keyframes ani-el-logo-3 {
+    0% {
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+    100% {
+      -webkit-transform: scaleY(1.3);
+      transform: scaleY(1.3);
+    }
+  }
+}

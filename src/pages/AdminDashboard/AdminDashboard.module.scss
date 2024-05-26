@@ -1,0 +1,42 @@
+.dashboard {
+  padding-top: 110px;
+  .action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .side-action {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+    .btn-add {
+      cursor: pointer;
+      display: inline-flex;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-weight: 600;
+      background-color: var(--primary-color);
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+  .content {
+    margin-top: 25px;
+  }
+}
+
+.item-action {
+  display: flex;
+  gap: 20px;
+  .action-admin {
+    cursor: pointer;
+  }
+}

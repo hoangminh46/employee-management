@@ -1,0 +1,57 @@
+.profile {
+  padding-top: 110px;
+  color: #000;
+  .wrapper {
+    width: 100%;
+    height: auto;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    color: #000;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 5px 25px rgba(34, 51, 84, 0.15);
+    .title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: auto;
+      font-size: 24px;
+      font-weight: normal;
+      border-bottom: 1px solid #ebebeb;
+      padding: 30px;
+      font-weight: 600;
+      .title-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .edit-btn {
+        cursor: pointer;
+        padding: 5px;
+        background-color: #f9fbfc;
+        border: 1px solid #e7e7e7;
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+        vertical-align: middle;
+        float: right;
+      }
+    }
+    .user-data {
+      display: flex;
+    }
+    .color {
+      background-color: #f9f9f9;
+    }
+    .data-left {
+      display: flex;
+      width: 50%;
+      gap: 20px;
+      padding: 20px 40px;
+      .data-title {
+        font-weight: 600;
+        min-width: 150px;
+      }
+    }
+  }
+}

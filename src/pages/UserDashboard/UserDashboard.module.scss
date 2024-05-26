@@ -1,0 +1,94 @@
+.dashboard {
+  display: flex;
+  padding-top: 110px;
+  gap: 20px;
+  .right-content {
+    width: 20%;
+    padding-top: 37px;
+    .true-time {
+      background: linear-gradient(91.34deg, #76caf9, #9c86f3 99.96%);
+      box-shadow: 0 5px 25px rgba(34, 51, 84, 0.15);
+      border-radius: 5px;
+      height: 74px;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 0 0 10px;
+      position: relative;
+      box-sizing: border-box;
+      .time-img {
+        position: absolute;
+        right: 22px;
+        right: 0;
+        top: 0;
+      }
+      .time-header {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: #fff;
+        margin: 0 0 8px;
+      }
+      .time-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 22px;
+        color: #fff;
+      }
+      .first-time {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .second-time {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 10px;
+        z-index: 999;
+      }
+    }
+    .check-daily {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 16.75px 17.5px;
+      margin-bottom: 10px;
+      background: #ebf9ff;
+      border: 1px solid #b8e8fd;
+      box-shadow: 0 5px 25px rgba(34, 51, 84, 0.15);
+      border-radius: 5px;
+      color: #33c2ff;
+      .daily-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .time-today {
+        font-size: 13px;
+        margin-top: 6px;
+      }
+      .btn-checkin {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px 20px;
+        background: #33c2ff;
+        color: #fff;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-checkin:hover {
+        background: linear-gradient(91.34deg, #76caf9, #9c86f3 99.96%);
+      }
+    }
+  }
+}
