@@ -281,3 +281,38 @@ a:hover {
 .rbc-header {
   padding: 8px 0;
 }
+
+.confirm-content {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.confirm-modal {
+  width: 35% !important;
+  top: 200px !important;
+}
+
+.btn-cancel {
+  flex: 1 1;
+  background-color: #fff8ee;
+  color: var(--primary-color);
+  border-radius: 5px;
+  text-align: center;
+  padding: 12px 0;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-confirm {
+  flex: 1 1;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 5px;
+  text-align: center;
+  padding: 12px 0;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}

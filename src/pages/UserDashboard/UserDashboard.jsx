@@ -15,6 +15,9 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { addCheckin, addCheckout, getUsers } from "@/redux/usersSlice";
 import { v4 as uuidv4 } from "uuid";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Modal } from "antd";
 
 const messages = {
   allDay: "Cả ngày",
@@ -59,6 +62,7 @@ export default function UserDashboard() {
   const userAttendance = user?.attendance;
   const [events, setEvents] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -124,6 +128,10 @@ export default function UserDashboard() {
     );
   }, [userAttendance]);
 
+  function handleOpenModal() {
+    setIsModalOpen(true);
+  }
+
   function handleCheckin() {
     const currentDate = new Date();
     const day = currentDate.getDate();
@@ -141,7 +149,6 @@ export default function UserDashboard() {
       year,
       checkIn: `${hours}:${minutes}:${seconds}`,
     };
-    console.log(timeCheckin);
     dispatch(addCheckin(timeCheckin))
       .then(() => {
         dispatch(getUsers());
@@ -184,6 +191,19 @@ export default function UserDashboard() {
             };
           })
         );
+      })
+      .then(() => {
+        toast.success("Check-in thành công !!!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       })
       .catch((error) => {
         console.error("Error in handleCheckin:", error);
@@ -243,6 +263,22 @@ export default function UserDashboard() {
           })
         );
       })
+      .then(() => {
+        setIsModalOpen(false);
+      })
+      .then(() => {
+        toast.success("Check-out thành công !!!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      })
       .catch((error) => {
         console.error("Error in handleCheckin:", error);
       });
@@ -300,7 +336,7 @@ export default function UserDashboard() {
           )}
           {currentID?.checkIn &&
           currentID?.checkOut ? null : currentID?.checkIn ? (
-            <div className={cx("btn-checkin")} onClick={handleCheckout}>
+            <div className={cx("btn-checkin")} onClick={handleOpenModal}>
               <LogoutOutlined />
               Checkout
             </div>
@@ -310,6 +346,21 @@ export default function UserDashboard() {
           ) : null}
         </div>
       </div>
+      <Modal
+        open={isModalOpen}
+        className="default-modal confirm-modal"
+        footer={false}
+        title="Bạn có chắc chắn muốn Check-out không?"
+      >
+        <div className="confirm-content">
+          <div className="btn-cancel" onClick={() => setIsModalOpen(false)}>
+            Huỷ
+          </div>
+          <div className="btn-confirm" onClick={handleCheckout}>
+            Xác nhận
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
