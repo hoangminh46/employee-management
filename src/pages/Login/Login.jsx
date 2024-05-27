@@ -2,17 +2,23 @@ import AmelaLogo from "@/components/AmelaLogo/AmelaLogo";
 import LoginForm from "@/components/LoginForm/LoginForm";
 import styles from "@/pages/Login/Login.module.scss";
 import classNames from "classnames/bind";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import ForgotPass from "@/components/ForgotPass/ForgotPass";
 
 const cx = classNames.bind(styles);
 
 export default function Login() {
+  const [showLoginForm, setShowLoginForm] = useState(true);
   const userToken = localStorage.getItem("userToken");
   const navigateTo = useNavigate();
   const decodedToken = userToken ? jwtDecode(userToken) : null;
   const userRole = decodedToken?.role;
+
+  const handleToggleForm = () => {
+    setShowLoginForm(!showLoginForm);
+  };
 
   useEffect(() => {
     if (userToken) {
@@ -40,7 +46,11 @@ export default function Login() {
         <AmelaLogo />
       </div>
       <div className={cx("content")}>
-        <LoginForm />
+        {showLoginForm ? (
+          <LoginForm onToggleForm={handleToggleForm} />
+        ) : (
+          <ForgotPass onToggleForm={handleToggleForm} />
+        )}
       </div>
     </div>
   );

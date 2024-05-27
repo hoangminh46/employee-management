@@ -6,7 +6,10 @@ const cx = classNames.bind(styles);
 export default function NotFound() {
   return (
     <div className={cx("notfound")}>
-      <div>Not Found</div>
+      <div className={cx("content")}>
+        <div>404</div>
+        <div>Page Not Found</div>
+      </div>
     </div>
   );
 }

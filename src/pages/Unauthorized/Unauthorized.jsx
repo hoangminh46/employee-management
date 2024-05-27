@@ -5,8 +5,11 @@ const cx = classNames.bind(styles);
 
 export default function Unauthorized() {
   return (
-    <div className={cx("unauthorized")}>
-      <div>unauthorized</div>
+    <div className={cx("notfound")}>
+      <div className={cx("content")}>
+        <div>Error</div>
+        <div>Unauthorized</div>
+      </div>
     </div>
   );
 }

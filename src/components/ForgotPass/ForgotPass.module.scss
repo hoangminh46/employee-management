@@ -12,7 +12,7 @@
     font-size: 2rem;
     color: var(--primary-color);
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 30px;
   }
   h3 {
     font-size: 1.75rem;
@@ -60,12 +60,6 @@
       font-weight: 600;
     }
   }
-  .forgot-pass {
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 8px;
-    cursor: pointer;
-  }
   .btn-login {
     box-sizing: border-box;
     border: none;
@@ -81,10 +75,15 @@
     border: 1px solid var(--primary-color);
     transition: ease-in-out 0.1s;
   }
+  .back-login {
+    margin-top: 16px;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 600;
+  }
   @include mobile {
     max-width: 70%;
     flex: 1;
-    width: 40%;
     margin: 20px auto 0 auto;
   }
   @include tablet {

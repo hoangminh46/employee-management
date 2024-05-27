@@ -1,3 +1,4 @@
+@import "/src/styles/Responsive.scss";
 .header {
   position: absolute;
   left: 0;
@@ -48,6 +49,11 @@
         color: var(--primary-color);
         padding: 0 12px;
       }
+    }
+  }
+  @include mobile {
+    .header-content {
+      padding: 0 20px;
     }
   }
 }

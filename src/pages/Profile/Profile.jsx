@@ -88,11 +88,11 @@ export default function Profile() {
         <div className={cx("title")}>
           <div className={cx("title-header")}>
             <InfoCircleFilled />
-            {userDecoded.id === ProfileId
+            {userDecoded?.id === ProfileId
               ? `Thông tin cá nhân`
               : `Thông tin cá nhân của ${currentUser?.name}`}
           </div>
-          {userDecoded.id === ProfileId ? (
+          {userDecoded?.id === ProfileId ? (
             <div
               className={cx("edit-btn")}
               onClick={() => setIsModalOpenEdit(true)}

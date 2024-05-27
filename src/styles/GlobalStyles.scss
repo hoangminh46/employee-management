@@ -1,5 +1,5 @@
 @import "/src/styles/Reset.scss";
-@import "/src/styles//Responsive.scss";
+@import "/src/styles/Responsive.scss";
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap");
 @import "react-big-calendar/lib/sass/styles";
 
@@ -32,7 +32,7 @@ a:hover {
 }
 
 .app {
-  width: var(--default-layout-width);
+  max-width: var(--default-layout-width);
   margin: 0 auto;
 }
 
@@ -327,4 +327,22 @@ a:hover {
 
 .member-name a:hover {
   color: var(--primary-color);
+}
+
+@include mobile {
+  .ant-table {
+    overflow-x: auto;
+    overflow-y: auto;
+    min-height: 55vh !important;
+    max-height: 55vh !important;
+  }
+  .ant-table-cell {
+    padding: 6px !important;
+  }
+  .default-modal {
+    width: 100% !important;
+  }
+  .form-group select {
+    height: 31px !important;
+  }
 }

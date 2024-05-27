@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
-export default function LoginForm() {
+export default function LoginForm({ onToggleForm }) {
   const { userToken, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
@@ -99,7 +99,9 @@ export default function LoginForm() {
               className={cx("error-message")}
             />
           </div>
-          <p className={cx("forgot-pass")}>Quên mật khẩu?</p>
+          <p className={cx("forgot-pass")} onClick={onToggleForm}>
+            Quên mật khẩu?
+          </p>
 
           <button type="submit" className={cx("btn-login")}>
             Đăng nhập

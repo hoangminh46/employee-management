@@ -18,6 +18,11 @@ const checkUserRole = (role, path) => {
     return <UserDashboard />;
   } else if (role === "user" && path === "/member-list") {
     return <MemberList />;
+  } else if (
+    (role === "user" && path === "/profile/:ProfileId") ||
+    (role === "admin" && path === "/profile/:ProfileId")
+  ) {
+    return <Profile />;
   } else {
     return <Navigate to="/unauthorized" />;
   }
@@ -70,7 +75,7 @@ export default function Routes() {
         },
         {
           path: "profile/:ProfileId",
-          element: <Profile />,
+          element: checkUserRole(userRole, "/profile/:ProfileId"),
         },
       ],
     },

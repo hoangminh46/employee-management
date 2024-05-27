@@ -1,3 +1,4 @@
+@import "/src/styles/Responsive.scss";
 .login {
   height: 100vh;
   video {
@@ -16,5 +17,19 @@
   }
   .content {
     display: flex;
+  }
+  @include mobile {
+    .header {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  @include tablet {
+    .header {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
   }
 }

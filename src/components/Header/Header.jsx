@@ -26,7 +26,7 @@ export default function Header() {
     <div className={cx("header")}>
       <div className={cx("header-content")}>
         <div className={cx("header-right")}>
-          <AmelaLogo role={decodedToken.role} />
+          <AmelaLogo role={decodedToken?.role} />
           {decodedToken?.role === "user" ? (
             <div className={cx("member-link")}>
               <div className={cx("member-list")}>

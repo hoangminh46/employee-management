@@ -1,3 +1,13 @@
 .notfound {
-  background-color: #f75656;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    font-size: 30px;
+  }
 }
