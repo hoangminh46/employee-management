@@ -317,6 +317,30 @@ a:hover {
   outline: none;
 }
 
+.message-modal {
+  width: 20% !important;
+  top: 250px !important;
+  .message-content {
+    padding: 20px;
+    .message-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .message-btn {
+      flex: 1 1;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border-radius: 5px;
+      text-align: center;
+      padding: 12px 0;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+  }
+}
+
 .active-nav {
   display: flex;
   align-items: center;

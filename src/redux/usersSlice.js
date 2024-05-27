@@ -7,6 +7,8 @@ const initialState = {
   users: [],
   usersFind: [],
   message: {},
+  forgotMessage: {},
+  isLoading: false,
 };
 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
@@ -191,6 +193,17 @@ const usersSlice = createSlice({
     });
     builder.addCase(editUsers.rejected, (state, action) => {
       state.message = action.payload.data.message;
+    });
+    builder.addCase(resetPass.fulfilled, (state, action) => {
+      state.forgotMessage = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(resetPass.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(resetPass.rejected, (state, action) => {
+      state.forgotMessage = action.payload.data;
+      state.isLoading = false;
     });
   },
 });

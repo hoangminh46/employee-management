@@ -1,15 +1,20 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "@/components/ForgotPass/ForgotPass.module.scss";
 import classNames from "classnames/bind";
 import { CaretLeftFilled } from "@ant-design/icons";
 import { resetPass } from "@/redux/usersSlice";
+import { Modal } from "antd";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 export default function ForgotPass({ onToggleForm }) {
+  const messageForgot = useSelector((state) => state.users.forgotMessage);
+  const isLoading = useSelector((state) => state.users.isLoading);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -19,7 +24,9 @@ export default function ForgotPass({ onToggleForm }) {
 
   // Xử lý submit form
   const handleSubmit = (values) => {
-    dispatch(resetPass(values));
+    dispatch(resetPass(values)).then(() => {
+      setIsModalOpen(true);
+    });
   };
 
   return (
@@ -47,7 +54,11 @@ export default function ForgotPass({ onToggleForm }) {
             />
           </div>
 
-          <button type="submit" className={cx("btn-login")}>
+          <button
+            type="submit"
+            className={cx("btn-login")}
+            disabled={isLoading}
+          >
             Reset mật khẩu
           </button>
           <div className={cx("back-login")} onClick={onToggleForm}>
@@ -56,6 +67,32 @@ export default function ForgotPass({ onToggleForm }) {
           </div>
         </Form>
       </Formik>
+      <Modal
+        open={isModalOpen}
+        className="default-modal message-modal"
+        footer={false}
+        title="Thông báo"
+      >
+        <div className="message-content">
+          <div className="message-title">{messageForgot?.message}</div>
+          {messageForgot.type === 1 && (
+            <div className="message-btn" onClick={() => setIsModalOpen(false)}>
+              Xác nhận
+            </div>
+          )}
+          {messageForgot.type === 2 && (
+            <div
+              className="message-btn"
+              onClick={() => {
+                onToggleForm();
+                setIsModalOpen(false);
+              }}
+            >
+              Xác nhận
+            </div>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 }
