@@ -9,12 +9,15 @@ import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import UserDashboard from "@/pages/UserDashboard/UserDashboard";
 import NotFound from "@/pages/NotFound/NotFound";
 import Profile from "@/pages/Profile/Profile";
+import MemberList from "@/pages/MemberList/MemberList";
 
 const checkUserRole = (role, path) => {
   if (role === "admin" && path === "/admin-dashboard") {
     return <AdminDashboard />;
   } else if (role === "user" && path === "/user-dashboard") {
     return <UserDashboard />;
+  } else if (role === "user" && path === "/member-list") {
+    return <MemberList />;
   } else {
     return <Navigate to="/unauthorized" />;
   }
@@ -60,6 +63,10 @@ export default function Routes() {
         {
           path: "user-dashboard",
           element: checkUserRole(userRole, "/user-dashboard"),
+        },
+        {
+          path: "member-list",
+          element: checkUserRole(userRole, "/member-list"),
         },
         {
           path: "profile/:ProfileId",

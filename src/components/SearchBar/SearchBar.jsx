@@ -21,7 +21,7 @@ export default function SearchBar() {
       <input
         type="text"
         className={cx("search-bar")}
-        placeholder="Tìm kiếm nhân viên..."
+        placeholder="Tìm kiếm người dùng..."
         value={inputValue}
         onChange={handleChangeInput}
       />

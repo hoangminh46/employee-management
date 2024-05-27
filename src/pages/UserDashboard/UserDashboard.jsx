@@ -139,7 +139,6 @@ export default function UserDashboard() {
     const year = currentDate.getFullYear();
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
 
     const timeCheckin = {
       userId: userID,
@@ -147,7 +146,7 @@ export default function UserDashboard() {
       day,
       month,
       year,
-      checkIn: `${hours}:${minutes}:${seconds}`,
+      checkIn: `${hours}:${minutes}`,
     };
     dispatch(addCheckin(timeCheckin))
       .then(() => {
@@ -214,11 +213,10 @@ export default function UserDashboard() {
     const currentDate = new Date();
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
     const timeCheckout = {
       userId: userID,
       attendanceId: currentID.id,
-      checkOut: `${hours}:${minutes}:${seconds}`,
+      checkOut: `${hours}:${minutes}`,
     };
     dispatch(addCheckout(timeCheckout))
       .then(() => {
@@ -344,6 +342,19 @@ export default function UserDashboard() {
           {currentID?.checkIn && currentID?.checkOut ? (
             <div className={cx("btn-checked")}>Đã chấm công</div>
           ) : null}
+        </div>
+        <div className={cx("total-time")}>
+          <div className={cx("total-detail")}>
+            <div className={cx("detail-left")}>
+              <img
+                src="https://me.amela.vn/static/media/docs-icon.d0339783.svg"
+                alt=""
+                style={{ marginRight: "4px" }}
+              />
+              Tổng số công
+            </div>
+            <div style={{ fontWeight: "600" }}>48/184</div>
+          </div>
         </div>
       </div>
       <Modal

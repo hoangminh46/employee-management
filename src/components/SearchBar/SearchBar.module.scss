@@ -1,11 +1,12 @@
 .search-container {
   display: block;
   height: 48px;
+  width: 320px;
 }
 input.search-bar {
   margin: 0 auto;
   width: 100%;
-  height: 45px;
+  height: 100%;
   padding: 0 20px;
   font-size: 1rem;
   border: 2px solid #5f6368;
@@ -13,6 +14,7 @@ input.search-bar {
   outline: none;
   background-color: transparent;
   color: var(--text-color);
+  box-sizing: border-box;
   &:focus {
     border: 2px solid var(--primary-color);
     transition: 0.35s ease;
@@ -42,6 +44,6 @@ input.search-bar {
   width: 40px;
   height: 40px;
   top: -43px;
-  right: -28px;
+  right: 10px;
   fill: #9aa0a6;
 }

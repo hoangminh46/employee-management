@@ -43,14 +43,14 @@ a:hover {
   background-color: #1f1f2b !important;
   .ant-dropdown-menu-title-content div {
     color: var(--primary-color) !important;
-    font-size: 20px;
+    font-size: 18px;
   }
   .ant-dropdown-menu-title-content div a {
     color: var(--primary-color) !important;
-    font-size: 20px;
+    font-size: 18px;
   }
   .ant-dropdown-menu-item {
-    padding: 10px 30px !important;
+    padding: 10px 20px !important;
   }
   .ant-dropdown-menu-item:hover {
     background-color: var(--primary-color) !important;
@@ -279,7 +279,7 @@ a:hover {
 }
 
 .rbc-header {
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .confirm-content {
@@ -315,4 +315,12 @@ a:hover {
   cursor: pointer;
   border: none;
   outline: none;
+}
+
+.active-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: hsla(0, 0%, 100%, 0.15) !important;
 }

@@ -3,7 +3,7 @@
   left: 0;
   right: 0;
   background-color: #222433;
-  height: 80px;
+  height: 60px;
   border-bottom: 3px solid var(--primary-color);
   .header-content {
     max-width: 1140px;
@@ -12,6 +12,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .header-right {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
     .user-info {
       display: flex;
       align-items: center;
@@ -21,12 +27,26 @@
       font-weight: 600;
       border: 3px solid var(--primary-color);
       border-radius: 50%;
-      width: 54px;
-      height: 54px;
+      width: 36px;
+      height: 36px;
       .user-icon {
-        font-size: 36px;
+        font-size: 26px;
         flex: 1;
         display: block;
+      }
+    }
+    .member-link {
+      display: flex;
+      height: 100%;
+      gap: 10px;
+    }
+    .member-list {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      a {
+        color: var(--primary-color);
+        padding: 0 12px;
       }
     }
   }

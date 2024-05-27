@@ -1,7 +1,7 @@
 import styles from "@/components/Header/Header.module.scss";
 import classNames from "classnames/bind";
 import AmelaLogo from "../AmelaLogo/AmelaLogo";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { UserOutlined } from "@ant-design/icons";
 import { Dropdown } from "antd";
@@ -25,7 +25,29 @@ export default function Header() {
   return (
     <div className={cx("header")}>
       <div className={cx("header-content")}>
-        <AmelaLogo role={decodedToken.role} />
+        <div className={cx("header-right")}>
+          <AmelaLogo role={decodedToken.role} />
+          {decodedToken?.role === "user" ? (
+            <div className={cx("member-link")}>
+              <div className={cx("member-list")}>
+                <NavLink
+                  to="/user-dashboard"
+                  className={({ isActive }) => (isActive ? "active-nav" : "")}
+                >
+                  Chấm công
+                </NavLink>
+              </div>
+              <div className={cx("member-list")}>
+                <NavLink
+                  to="/member-list"
+                  className={({ isActive }) => (isActive ? "active-nav" : "")}
+                >
+                  Thông tin member
+                </NavLink>
+              </div>
+            </div>
+          ) : null}
+        </div>
         <div className={cx("header-left")}>
           <Dropdown
             menu={{

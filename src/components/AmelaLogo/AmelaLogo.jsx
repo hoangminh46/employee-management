@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 export default function AmelaLogo({ role }) {
   return (
     <div className={cx("site-brand")}>
-      <Link to={role === "admin" ? "/admin-dashboard" : "user-dashboard"}>
+      <Link to={role === "admin" ? "/admin-dashboard" : "/user-dashboard"}>
         <div title="AMELA Technology" className={cx("logo")}>
           <img
             src="https://amela.vn/wp-content/uploads/2021/08/logo.svg"
