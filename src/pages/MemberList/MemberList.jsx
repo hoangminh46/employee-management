@@ -24,7 +24,7 @@ export default function MemberList() {
       dataIndex: "name",
       key: "name",
       render: (text, record) => (
-        <div>
+        <div className="member-name">
           <Link to={`/profile/${record.id}`}>{text}</Link>
         </div>
       ),

@@ -168,7 +168,7 @@ export default function Profile() {
         open={isModalOpenEdit}
         className="default-modal"
         footer={false}
-        title="Sửa thông tin nhân viên"
+        title="Sửa thông tin cá nhân"
       >
         <div className="default-modal-content">
           <Formik

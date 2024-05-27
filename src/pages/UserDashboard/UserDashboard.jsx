@@ -13,7 +13,12 @@ import {
 } from "@ant-design/icons";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
-import { addCheckin, addCheckout, getUsers } from "@/redux/usersSlice";
+import {
+  addCheckin,
+  addCheckout,
+  addTotalTime,
+  getUsers,
+} from "@/redux/usersSlice";
 import { v4 as uuidv4 } from "uuid";
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,15 +60,45 @@ export default function UserDashboard() {
     return user.id === userID;
   });
   const dateToday = new Date().getDate();
+  const currMonth = new Date().getMonth() + 1;
   const currentID = user?.attendance?.find((item) => {
     return item.day === dateToday;
   });
 
   const userAttendance = user?.attendance;
+
+  let totalPerMonth = userAttendance?.reduce((acc, item) => {
+    if (item.month === currMonth) {
+      return acc + Number((item.total / 60).toFixed(1));
+    }
+    return acc;
+  }, 0);
+
   const [events, setEvents] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const [totalWorkingHours, setTotalWorkingHours] = useState(0);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let workingDays = 0;
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(currentYear, currentMonth, day);
+      const dayOfWeek = date.getDay();
+
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+        workingDays++;
+      }
+    }
+
+    setTotalWorkingHours(workingDays * 8);
+  }, []);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -93,7 +128,7 @@ export default function UserDashboard() {
                   : "date-content date-none"
               }
             >
-              <div>Công 8 - Muộn 0</div>
+              <div>Công: {(item.total / 60).toFixed(1)}</div>
               <div className="check-status">
                 {item.checkIn ? (
                   <CheckCircleFilled
@@ -160,7 +195,7 @@ export default function UserDashboard() {
               end: new Date(item.year, item.month, item.day),
               title: (
                 <div className="date-content">
-                  <div>Công 8 - Muộn 0</div>
+                  <div>Công: {(item.total / 60).toFixed(1)}</div>
                   <div className="check-status">
                     {item.checkIn ? (
                       <CheckCircleFilled
@@ -220,6 +255,13 @@ export default function UserDashboard() {
     };
     dispatch(addCheckout(timeCheckout))
       .then(() => {
+        return Promise.all([
+          dispatch(
+            addTotalTime({ userId: userID, attendanceId: currentID.id })
+          ),
+        ]);
+      })
+      .then(() => {
         dispatch(getUsers());
       })
       .then(() => {
@@ -230,7 +272,7 @@ export default function UserDashboard() {
               end: new Date(item.year, item.month, item.day),
               title: (
                 <div className="date-content">
-                  <div>Công 8 - Muộn 0</div>
+                  <div>Công: {(item.total / 60).toFixed(1)}</div>
                   <div className="check-status">
                     {item.checkIn ? (
                       <CheckCircleFilled
@@ -353,7 +395,9 @@ export default function UserDashboard() {
               />
               Tổng số công
             </div>
-            <div style={{ fontWeight: "600" }}>48/184</div>
+            <div style={{ fontWeight: "600" }}>
+              {totalPerMonth?.toFixed(1)}/{totalWorkingHours}
+            </div>
           </div>
         </div>
       </div>

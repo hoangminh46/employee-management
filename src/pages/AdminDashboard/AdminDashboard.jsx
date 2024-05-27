@@ -34,7 +34,7 @@ export default function AdminDashboard() {
       dataIndex: "name",
       key: "name",
       render: (text, record) => (
-        <div>
+        <div className="member-name">
           <Link to={`/profile/${record.id}`}>{text}</Link>
         </div>
       ),
@@ -209,7 +209,7 @@ export default function AdminDashboard() {
     });
   };
 
-  const handleAddUSer = (values) => {
+  const handleAddUSer = (values, { resetForm }) => {
     const newUser = {
       ...values,
       phone: "",
@@ -228,6 +228,7 @@ export default function AdminDashboard() {
       .catch((error) => {
         console.error(error);
       });
+    resetForm();
   };
 
   const handleEditUSer = (values) => {

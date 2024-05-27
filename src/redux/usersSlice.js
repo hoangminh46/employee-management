@@ -89,6 +89,25 @@ export const addCheckout = createAsyncThunk(
   }
 );
 
+export const addTotalTime = createAsyncThunk(
+  "users/addTotalTime",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.put(
+        `${apiUrl}/users/${payload.userId}/attendance/${payload.attendanceId}/total`,
+        payload
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response);
+      } else {
+        return rejectWithValue(error.response);
+      }
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,

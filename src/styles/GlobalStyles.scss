@@ -324,3 +324,7 @@ a:hover {
   width: 100%;
   background: hsla(0, 0%, 100%, 0.15) !important;
 }
+
+.member-name a:hover {
+  color: var(--primary-color);
+}
