@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "@/components/ForgotPass/ForgotPass.module.scss";
 import classNames from "classnames/bind";
 import { CaretLeftFilled } from "@ant-design/icons";
+import { resetPass } from "@/redux/usersSlice";
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,7 @@ export default function ForgotPass({ onToggleForm }) {
 
   // Xử lý submit form
   const handleSubmit = (values) => {
-    console.log(values);
+    dispatch(resetPass(values));
   };
 
   return (

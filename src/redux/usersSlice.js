@@ -108,6 +108,22 @@ export const addTotalTime = createAsyncThunk(
   }
 );
 
+export const resetPass = createAsyncThunk(
+  "users/resetPass",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`${apiUrl}/reset-password`, payload);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response);
+      } else {
+        return rejectWithValue(error.response);
+      }
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
