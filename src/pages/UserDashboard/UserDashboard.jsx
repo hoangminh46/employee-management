@@ -23,6 +23,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Modal } from "antd";
+import { NavLink } from "react-router-dom";
 
 const messages = {
   allDay: "Cả ngày",
@@ -401,6 +402,26 @@ export default function UserDashboard() {
           </div>
         </div>
       </div>
+      {decodedToken?.role === "user" ? (
+        <div className={cx("member-link", "mobile-link")}>
+          <div className={cx("member-list")}>
+            <NavLink
+              to="/user-dashboard"
+              className={({ isActive }) => (isActive ? "active-mobile" : "")}
+            >
+              Chấm công
+            </NavLink>
+          </div>
+          <div className={cx("member-list")}>
+            <NavLink
+              to="/member-list"
+              className={({ isActive }) => (isActive ? "active-mobile" : "")}
+            >
+              Thông tin member
+            </NavLink>
+          </div>
+        </div>
+      ) : null}
       <Modal
         open={isModalOpen}
         className="default-modal confirm-modal"

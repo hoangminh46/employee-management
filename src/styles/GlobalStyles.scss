@@ -349,6 +349,16 @@ a:hover {
   background: hsla(0, 0%, 100%, 0.15) !important;
 }
 
+.active-mobile {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color) !important;
+  color: var(--text-color) !important;
+}
+
 .member-name a:hover {
   color: var(--primary-color);
 }

@@ -1,7 +1,11 @@
+@import "/src/styles/Responsive.scss";
 .dashboard {
   display: flex;
   padding-top: 80px;
   gap: 20px;
+  .mobile-link {
+    display: none;
+  }
   .right-content {
     width: 20%;
     padding-top: 37px;
@@ -122,6 +126,33 @@
           display: flex;
           align-items: center;
         }
+      }
+    }
+  }
+  @include mobile {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 70px;
+    .right-content {
+      width: 80%;
+      padding-top: 0;
+    }
+    .mobile-link {
+      display: block;
+    }
+    .member-link {
+      display: flex;
+      height: 30px;
+      gap: 10px;
+    }
+    .member-list {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      a {
+        color: var(--primary-color);
+        padding: 0 12px;
       }
     }
   }

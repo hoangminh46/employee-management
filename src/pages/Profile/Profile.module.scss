@@ -1,3 +1,4 @@
+@import "/src/styles/Responsive.scss";
 .profile {
   padding-top: 110px;
   color: #000;
@@ -51,6 +52,24 @@
       .data-title {
         font-weight: 600;
         min-width: 150px;
+      }
+    }
+  }
+  @include mobile {
+    .title {
+      padding: 10px !important;
+    }
+    .user-data {
+      flex-direction: column;
+      .data-left {
+        box-sizing: border-box;
+        width: 100%;
+        gap: 10px;
+        padding: 16px 24px;
+        .data-title {
+          min-width: 100px;
+          max-width: 100px;
+        }
       }
     }
   }

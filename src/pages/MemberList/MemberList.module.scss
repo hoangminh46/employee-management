@@ -1,3 +1,4 @@
+@import "/src/styles/Responsive.scss";
 .dashboard {
   padding-top: 110px;
   .action {
@@ -30,6 +31,13 @@
   }
   .content {
     margin-top: 25px;
+  }
+  @include mobile {
+    padding-top: 70px;
+    .action {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 }
 
