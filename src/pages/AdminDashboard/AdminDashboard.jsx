@@ -157,10 +157,6 @@ export default function AdminDashboard() {
     role: Yup.string().required("Quyền hạn là bắt buộc!!!"),
     division: Yup.string().required("Division là bắt buộc!!!"),
     position: Yup.string().required("Vị trí là bắt buộc!!!"),
-    message: Yup.string().required("Tin nhắn là bắt buộc!!!"),
-    usersListEmail: Yup.array()
-      .required("Người nhận là bắt buộc")
-      .min(1, "Chọn ít nhất 1 người nhận!!!"),
   });
 
   useEffect(() => {
