@@ -1,5 +1,8 @@
 import SearchBar from "@/components/SearchBar/SearchBar";
 import styles from "@/pages/AdminDashboard/AdminDashboard.module.scss";
+import moment from "moment";
+import Select from "react-select";
+import dayjs from "dayjs";
 import {
   addUsers,
   clearMessage,
@@ -7,7 +10,7 @@ import {
   editUsers,
   getUsers,
 } from "@/redux/usersSlice";
-import { Modal, Table } from "antd";
+import { DatePicker, Modal, Table, TimePicker } from "antd";
 import classNames from "classnames/bind";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +21,7 @@ import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import { MessageOutlined } from "@ant-design/icons";
 
 const cx = classNames.bind(styles);
 
@@ -118,10 +122,18 @@ export default function AdminDashboard() {
   const [userData, setUserData] = useState([]);
   const [currentPageSelected, setcurrentPageSelected] = useState(1);
   const [isModalOpenNew, setIsModalOpenNew] = useState(false);
+  const [isModalOpenMess, setIsModalOpenMess] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const showModalNew = () => {
     setIsModalOpenNew(true);
   };
+
+  const usersEmail = userData?.map((user) => {
+    return {
+      value: user.email,
+      label: `${user.email} (${user.name})`,
+    };
+  });
 
   const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
   const showModalEdit = (record) => {
@@ -145,6 +157,10 @@ export default function AdminDashboard() {
     role: Yup.string().required("Quyền hạn là bắt buộc!!!"),
     division: Yup.string().required("Division là bắt buộc!!!"),
     position: Yup.string().required("Vị trí là bắt buộc!!!"),
+    message: Yup.string().required("Tin nhắn là bắt buộc!!!"),
+    usersListEmail: Yup.array()
+      .required("Người nhận là bắt buộc")
+      .min(1, "Chọn ít nhất 1 người nhận!!!"),
   });
 
   useEffect(() => {
@@ -244,6 +260,10 @@ export default function AdminDashboard() {
       });
   };
 
+  function handleSendMessage(values) {
+    console.log(values);
+  }
+
   return (
     <div className={cx("dashboard")}>
       <div className={cx("action")}>
@@ -269,6 +289,14 @@ export default function AdminDashboard() {
             </svg>
 
             <span>Thêm nhân viên</span>
+          </div>
+          <div
+            className={cx("btn-add")}
+            onClick={() => setIsModalOpenMess(true)}
+          >
+            <MessageOutlined style={{ color: "#fff", fontSize: "24px" }} />
+
+            <span>Gửi tin nhắn</span>
           </div>
         </div>
       </div>
@@ -577,6 +605,107 @@ export default function AdminDashboard() {
                 </button>
               </div>
             </Form>
+          </Formik>
+        </div>
+      </Modal>
+
+      <Modal
+        open={isModalOpenMess}
+        className="default-modal mess-modal"
+        footer={false}
+        title="Gửi tin nhắn"
+      >
+        <div className="default-modal-content">
+          <Formik
+            initialValues={{
+              message: "",
+              usersListEmail: [],
+              date: "",
+              time: "",
+            }}
+            onSubmit={handleSendMessage}
+          >
+            {({ values, handleChange }) => (
+              <Form>
+                <div className="form-group">
+                  <div className="form-title">Nhân viên nhận tin nhắn</div>
+                  <Field
+                    name="usersListEmail"
+                    component={({ field, form }) => (
+                      <Select
+                        {...field}
+                        name="usersListEmail"
+                        options={usersEmail}
+                        isMulti
+                        onChange={(option) =>
+                          form.setFieldValue("usersListEmail", option)
+                        }
+                      />
+                    )}
+                  />
+                </div>
+                <div className="form-group">
+                  <div className="form-title">Nội dung tin nhắn</div>
+                  <Field
+                    as="textarea"
+                    name="message"
+                    rows="5"
+                    placeholder="Nhập tin nhắn của bạn"
+                    style={{ width: "100%" }}
+                  />
+                </div>
+                <div className="form-group">
+                  <div className="form-title">Thời gian gửi tin nhắn</div>
+                </div>
+                <div className="form-picker">
+                  <div>
+                    <Field name="date">
+                      {({ field, form }) => (
+                        <DatePicker
+                          value={field.value}
+                          onChange={(date, dateString) =>
+                            form.setFieldValue("date", date)
+                          }
+                          format="DD-MM-YYYY"
+                          hasFeedback
+                        />
+                      )}
+                    </Field>
+                  </div>
+                  <div>
+                    <Field name="time">
+                      {({ field, form }) => (
+                        <TimePicker
+                          value={field.value}
+                          onChange={(time, dateString) =>
+                            form.setFieldValue("time", time)
+                          }
+                          format="h:mm A"
+                          hourStep={1}
+                          minuteStep={5}
+                          hasFeedback
+                          use12Hours
+                          name="time"
+                          label="time"
+                        />
+                      )}
+                    </Field>
+                  </div>
+                </div>
+                <div className="footer-modal">
+                  <button
+                    type="button"
+                    className="btn-cancel"
+                    onClick={() => setIsModalOpenMess(false)}
+                  >
+                    Huỷ
+                  </button>
+                  <button className="btn-save" type="submit">
+                    Lưu
+                  </button>
+                </div>
+              </Form>
+            )}
           </Formik>
         </div>
       </Modal>

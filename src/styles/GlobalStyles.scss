@@ -380,3 +380,36 @@ a:hover {
     height: 31px !important;
   }
 }
+
+.mess-modal {
+  width: 40% !important;
+  .form-group {
+    .form-title {
+      margin-bottom: 10px !important;
+      font-weight: 600 !important;
+    }
+    .form-list {
+      border: 1px solid #1f1f2b;
+      height: 200px;
+      overflow-y: auto;
+      .label-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px !important;
+        input {
+          width: auto;
+        }
+      }
+    }
+  }
+  .form-picker {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: 600;
+}
