@@ -61,10 +61,14 @@
     }
   }
   .btn-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
     box-sizing: border-box;
     border: none;
     background-color: var(--primary-color);
-    display: block;
     width: 100%;
     padding: 14px 0;
     border-radius: 4px;
@@ -74,6 +78,11 @@
     color: var(--white);
     border: 1px solid var(--primary-color);
     transition: ease-in-out 0.1s;
+    height: 50px;
+    max-height: 50px;
+    .spin-btn {
+      font-size: 30px;
+    }
   }
   .back-login {
     margin-top: 16px;

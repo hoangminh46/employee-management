@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "@/components/ForgotPass/ForgotPass.module.scss";
 import classNames from "classnames/bind";
-import { CaretLeftFilled } from "@ant-design/icons";
+import { CaretLeftFilled, SyncOutlined } from "@ant-design/icons";
 import { resetPass } from "@/redux/usersSlice";
 import { Modal } from "antd";
 import { useState } from "react";
@@ -59,7 +59,11 @@ export default function ForgotPass({ onToggleForm }) {
             className={cx("btn-login")}
             disabled={isLoading}
           >
-            Reset mật khẩu
+            {isLoading ? (
+              <SyncOutlined spin className={cx("spin-btn")} />
+            ) : (
+              <span>Xác nhận</span>
+            )}
           </button>
           <div className={cx("back-login")} onClick={onToggleForm}>
             <CaretLeftFilled style={{ marginRight: "4px" }} /> Về trang đăng
