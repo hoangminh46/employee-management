@@ -31,6 +31,10 @@ export default function Profile() {
     username: Yup.string().required("Tên tài khoản là bắt buộc!!!"),
     password: Yup.string().required("Mật khẩu là bắt buộc!!!"),
     role: Yup.string().required("Quyền hạn là bắt buộc!!!"),
+    phone: Yup.string().matches(
+      /^(\+?\d{1,2}[\s-]?)?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/,
+      "Số điện thoại không hợp lệ"
+    ),
   });
 
   const currentUser = users.find((user) => {

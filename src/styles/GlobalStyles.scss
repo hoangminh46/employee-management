@@ -407,6 +407,9 @@ a:hover {
     gap: 20px;
     margin-bottom: 30px;
   }
+  @include mobile {
+    width: 90% !important;
+  }
 }
 
 .error-message {
